@@ -16,11 +16,17 @@ const Slide = ({ content }) => {
         position: "relative",
       }}
     >
-      {/* Wrap the markdown content in a parallax component */}
       <Parallax y={[-20, 20]}>
-        <div style={{ padding: "20px" }}>
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </div>
+        <ReactMarkdown
+          components={{
+            // Override the default rendering of <a> tags
+            a: ({ node, ...props }) => (
+              <a {...props} target="_blank" rel="noopener noreferrer" />
+            ),
+          }}
+        >
+          {content}
+        </ReactMarkdown>
       </Parallax>
     </div>
   );
